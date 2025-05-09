@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <h3 class="mb-4">Registered Patients</h3>
+  <table class="table table-striped table-hover table-bordered shadow-sm">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">DOB</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Address</th>
+        <th scope="col">City</th>
+        <th scope="col">State</th>
+        <th scope="col">Pincode</th>
+        <th scope="col">Phone No</th>
+        <th scope="col">Email Id</th>
+        <th scope="col" class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let patient of patientList; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{patient.name}}</td>
+        <td>{{patient.dateOfBirth.split('T')[0]}}</td>
+        <td>{{patient.gender}}</td>
+        <td>{{patient.address}}</td>
+        <td>{{patient.city}}</td>
+        <td>{{patient.state}}</td>
+        <td>{{patient.pinCode}}</td>
+        <td>{{patient.phoneNumber}}</td>
+        <td>{{patient.email}}</td>
+        <td>
+          <button class="btn btn-sm btn-outline-primary me-1" (click)="viewPatient(patient.id)">View</button>
+          <!-- <button class="btn btn-sm btn-outline-primary me-1">Edit</button> -->
+          <button class="btn btn-sm btn-primary me-1" (click)="deletePatient(patient.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

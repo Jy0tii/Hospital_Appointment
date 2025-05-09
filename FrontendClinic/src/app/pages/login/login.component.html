@@ -1,0 +1,66 @@
+<!-- <div class="container mt-5">
+  <form #userForm="ngForm" (ngSubmit)="logIn(userForm.value)">
+    <div class="row mb-3">
+      <label for="Email" class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" id="Email" name="Email" ngModel requiredd>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="Password" class="col-sm-3 col-form-label">Password</label>
+      <div class="col-sm-9">
+        <input type="password" class="form-control" id="Password" name="Password" ngModel required>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-sm-10 offset-sm-2">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="RememberMe" name="RememberMe">
+          <label class="form-check-label" for="RememberMe">
+            Remember Me
+          </label>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Sign in</button>
+  </form>
+</div> -->
+
+<main class="form-signin container mt-5 pt-5 w-25">
+  <form #userForm="ngForm" (ngSubmit)="logIn(userForm.value)">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+    <div class="form-floating">
+      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="Email" 
+      ngModel required #Email="ngModel">
+      <label for="floatingInput">Email address</label>
+
+      <div *ngIf="Email.invalid && Email.touched" class="text-danger">
+        Check the email.
+      </div>
+    </div>
+
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="Password" 
+      ngModel required #password="ngModel">
+      <label for="floatingPassword">Password</label>
+
+      <div *ngIf="password.invalid && password.touched" class="text-danger">
+        Check the password.
+      </div>
+    </div>
+
+    <div *ngIf="loginCheck" class="text-danger">
+      enter valid email and password
+    </div>
+    <!-- <div class="form-check text-start my-3">
+      <input class="form-check-input" type="checkbox" value="remember-me" id="checkDefault">
+      <label class="form-check-label" for="checkDefault">
+        Remember me
+      </label>
+    </div> -->
+    <button class="btn btn-primary w-100 py-2" type="submit" [disabled]="userForm.invalid">Sign in</button>
+  </form>
+</main>

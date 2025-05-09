@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <h3 class="mb-4">All Appointments</h3>
+  <table class="table table-striped table-bordered table-hover shadow-sm">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Mobile No</th>
+        <th scope="col">Email Id</th>
+        <th scope="col">Date & Time</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (appointment of appointmentList; track appointment.id){
+      <tr>
+        <th scope="row">{{appointment.id}}</th>
+        <td>{{appointment.name}}</td>
+        <td>{{appointment.mobileNo}}</td>
+        <td>{{appointment.emailId}}</td>
+        <td>{{appointment.appointmentDateTime}}</td>
+        <td>
+          <!-- <button class="btn btn-sm btn-outline-primary me-1">Edit</button> -->
+          <button class="btn btn-sm btn-primary me-1" (click)="deleteAppt(appointment.id)">Delete</button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

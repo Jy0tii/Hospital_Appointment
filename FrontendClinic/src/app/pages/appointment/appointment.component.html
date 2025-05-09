@@ -1,0 +1,68 @@
+<div class="container mt-3">
+  <form #userForm="ngForm" class="g-3" (ngSubmit)="addAppoint(userForm.value)">
+    <div *ngIf="!isLoggedIn">
+      <div class="col-md-4 mb-3">
+        <label for="Name" class="form-label">Name<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="Name" name="Name" placeholder="Mark" ngModel required minlength="3"
+          #NameRef="ngModel">
+
+        <div *ngIf="NameRef.invalid && NameRef.touched" class="text-danger">
+          Name length must be of 3 characters.
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="MobileNo" class="form-label">Mobile Number<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="MobileNo" name="MobileNo" placeholder="2158935894" ngModel required
+          minlength="10" maxlength="10" pattern="(^\d{10}$)" #MobNo="ngModel" />
+
+        <div *ngIf="MobNo.invalid && MobNo.touched" class="text-danger">
+          Invalid mobile number.
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="emailId" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="emailId" name="Email" placeholder="name@example.com" ngModel email
+          #Email="ngModel">
+
+        <div *ngIf="Email.invalid && Email.touched" class="text-danger">
+          Invalid Email.
+        </div>
+      </div>
+    </div>
+    <div *ngIf="isLoggedIn" class="pt-4"></div>
+
+    <!-- date and time -->
+
+    <div class="col-md-3 mb-3">
+      <label for="dateTime" class="form-label">Appointment Date<span class="text-danger">*</span></label>
+      <input type="date" class="form-control" id="dateTime" name="AppointmentDateTime" ngModel required
+        [min]="date" #Date="ngModel" />
+
+      <div *ngIf="Date.invalid && Date.touched" class="text-danger">
+        select the appropriate date and time.
+      </div>
+    </div>
+
+    <div class="col-12 mb-3">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="IsConfirmed" name="IsConfirmed" ngModel required
+          #check="ngModel">
+        <label class="form-check-label" for="IsConfirmed">
+          Want to confirm Appointment
+        </label>
+
+        <div *ngIf="check.invalid && check.touched" class="text-danger">
+          Select the checkbox to confirm appointment.
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit" [disabled]="!userForm.valid">Book Appointment</button>
+    </div>
+  </form>
+
+  <div *ngIf="isLoggedIn" class="mt-5 pt-5"></div>
+</div>

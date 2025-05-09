@@ -1,0 +1,144 @@
+<div class="container mt-3">
+  <form #userForm="ngForm" (ngSubmit)="formData(userForm.value)">
+    <div class="row g-3" *ngIf="!passwordVisible">
+
+      <div class="col-md-3">
+        <label for="Name" class="form-label-sm">Name<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="Name" name="Name" placeholder="Mark" ngModel required minlength="3"
+          #Name="ngModel">
+
+        <div *ngIf="Name.invalid && Name.touched" class="text-danger">
+          Name is required with minimum 3 charcters
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <label for="DateOfBirth" class="form-label-sm">DOB<span class="text-danger">*</span></label>
+        <input type="date" class="form-control" id="DateOfBirth" name="DateOfBirth"
+          [max]="today" ngModel required #DateOfBirth="ngModel"/>
+
+          <div *ngIf="DateOfBirth.invalid && DateOfBirth.touched" class="text-danger">
+            DOB is required.
+          </div>
+      </div>
+
+      <div class="col-md-3">
+        <label for="Gender" class="form-label-sm">Gender<span class="text-danger">*</span></label>
+        <select id="Gender" class="form-select" name="Gender" ngModel required maxlength="10" #Gender="ngModel">
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+
+        <div *ngIf="Gender.invalid && Gender.touched" class="text-danger">
+          Gender is required.
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <label for="MobileNo" class="form-label-sm">Mobile Number<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="MobileNo" name="PhoneNumber" placeholder="2158935894" ngModel
+          minlength="10" maxlength="10" pattern="(^\d{10}$)" #PhoneNumber="ngModel">
+
+          <div *ngIf="PhoneNumber.invalid && PhoneNumber.touched" class="text-danger">
+            Mobile Number is invalid.
+          </div>
+      </div>
+
+      <div class="col-md-5">
+        <label for="email" class="form-label-sm">Email address<span class="text-danger">*</span></label>
+        <input type="email" class="form-control" id="email" name="Email" placeholder="name@example.com" ngModel required
+          email #Email="ngModel">
+
+          <div *ngIf="Email.invalid && Email.touched" class="text-danger">
+            Email is invalid.
+          </div>
+      </div>
+
+      <div class="col-md-4">
+        <label for="City" class="form-label-sm">City<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="City" name="City" ngModel required maxlength="20" #City="ngModel">
+
+        <div *ngIf="City.invalid && City.touched" class="text-danger">
+          City is required.
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <label for="State" class="form-label-sm">State<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="State" name="State" ngModel required maxlength="20" #State="ngModel">
+
+        <div *ngIf="State.invalid && State.touched" class="text-danger">
+          State is required.
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <label for="PinCode" class="form-label-sm">PinCode<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="PinCode" name="PinCode" ngModel required maxlength="6" minlength="6"
+          pattern="[0-9]*" inputmode="numeric" #PinCode="ngModel">
+
+          <div *ngIf="PinCode.invalid && PinCode.touched" class="text-danger">
+            Invalid Pincode.
+          </div>
+      </div>
+
+      <div class="col-8">
+        <label for="Address" class="form-label-sm">Address<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="Address" placeholder="1234 Main St" name="Address" ngModel required
+          maxlength="100" #Address="ngModel">
+
+          <div *ngIf="Address.invalid && Address.touched" class="text-danger">
+            Address is required.
+          </div>
+      </div>
+
+      <div class="col-8">
+        <label for="MedicalHistory" class="form-label-sm">Medical History</label>
+        <input type="text" class="form-control" id="MedicalHistory" placeholder="Sugar" name="MedicalHistory" ngModel>
+      </div>
+
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">
+          Continue</button>
+      </div>
+    </div>
+  </form>
+
+  <form #registerForm="ngForm" (ngSubmit)="formPassword(registerForm.value)">
+    <div *ngIf="userForm.valid && passwordVisible">
+      <div class="col-md-5 mb-3 mt-5 pt-2">
+        <label for="password" class="form-label-sm">Password</label>
+        <input type="password" class="form-control" id="password" name="Password" ngModel minlength="6" required pattern="{{pass}}"
+          #Password="ngModel">
+
+        <div *ngIf="Password.invalid && Password.touched" class="text-danger">
+          Password must be of 6 characters long including Capital, small letter, digit and special character.
+        </div>
+      </div>
+
+      <div class="col-md-5 mb-4">
+        <label for="ConfirmPassword" class="form-label-sm">Confirm Password</label>
+        <input type="password" class="form-control" id="ConfirmPassword" placeholder="re-type password"
+          name="ConfirmPassword" #ConfirmPassword="ngModel" ngModel required>
+
+        <div *ngIf="ConfirmPassword.invalid && ConfirmPassword.touched" class="text-danger">
+          Confirm Password is required.
+        </div>
+        <div *ngIf="registerForm.value.Password !== registerForm.value.ConfirmPassword && (ConfirmPassword.touched)"
+          class="text-danger">
+          Passwords do not match.
+        </div>
+      </div>
+
+      <div class="col-12">
+        <button type="button" class="btn btn-primary mb-4"
+          [disabled]="registerForm.invalid || (registerForm.value.Password !== registerForm.value.ConfirmPassword)"
+          (click)="formPassword(registerForm.value)">
+          Register
+        </button>
+      </div>
+    </div>
+  </form>
+
+</div>
