@@ -1,4 +1,4 @@
-# Clinic Appointment Booking System
+# Hospital Appointment Booking System
 
 A **full-stack web application** for managing hospital appointments for patients, doctors, and administrators.  
 Built with **ASP.NET Core Web API**, **Angular**, and **SQL Server**, following clean architecture principles.
